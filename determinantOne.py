@@ -1,13 +1,13 @@
 from functools import reduce
 def determinantOne(n):
     M = 10**9+7
-    c = [20,32,64]
+    c = [20,32,64] #first three answers used to seed subsequent values
     o = 0
     l = 64
     a = 0
     s = sum(c)
     
-    #find all primes between 3 and n
+    #find all primes between 3 and n - this is a simple sieve of Eratosthenes implementation
     if n <= 3:
         return sum(c[:n])
     m = n + 1
