@@ -9,8 +9,11 @@ Example
 For
 
 letterMap = 
+
 a   b   c
+
 d   e   f
+
 g   h   i
 
 the output should be
