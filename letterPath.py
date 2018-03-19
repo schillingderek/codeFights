@@ -1,32 +1,34 @@
 def letterPath(M):
-    if not M:
+    if not M: #if the provided map is empty, return ''
         return ''
+    #find the size of the provided letter map
     n = len(M)
     m = len(M[0])
     
-
+    #recursive path finding algorithm a la https://www.python.org/doc/essays/graphs/
     def F(G, s, p=[]):
-        p = p + [s]
-        if s not in G:
+        p = p + [s] #add current location to path
+        if s not in G: #if there is nowhere to go from current location, return path
             return [p]
-        P = []
-        e = 0
+        P = [] #initialize list of all possible paths
+        e = 0 #initialize a variable to keep track of the length of the current path
 
-        for n in G[s]:
-            if n not in p:
+        for n in G[s]: #iterate over all "directions" you can go from current letter
+            if n not in p: #but only if the letter is not already in the path
                 N = F(G, n, p)
                 for n in N:
                     P.append(n)
             else:
                 e += 1
-        if e == len(G[s]):
+        if e == len(G[s]): #if the path uses all letters, return it as there is no way to make a longer path
             return [p]
         return P
 
     G = {}
     d = [[0,1],[0,-1],[1,0],[-1,0]]
     
-    #create graph of connected locations
+    #create graph of connected locations - iterate over the full map and find all letter connected
+    #orthogonally to the current location, add to a dictionary (G) that contains the mapped paths
     for i in range(n):
         for j in range(m):
             for k in range(4):
@@ -48,4 +50,9 @@ def letterPath(M):
                     if s > h:
                         h = s
     return h
+
+    ##Example driver:
+    #M = [[a,b,c],[d,e,f],[g,h,i]]
+    #answer = letterPath(M)
+    ##answer should be "ihgdefcba" - see letterPathREADME.md
     
